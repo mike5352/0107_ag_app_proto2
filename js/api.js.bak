@@ -1,0 +1,189 @@
+﻿class AIHandler {
+    constructor() {
+        this.apiKey = this.getStoredApiKey() || "AIzaSyDrJ8zKh6lruEZxWadGrSkyDNcA7BRy4ps";
+        this.genAI = null;
+        this.model = null;
+
+        if (this.apiKey) {
+            this.initGemini();
+        }
+
+        this.setupUI();
+    }
+
+    // localStorage를 안전하게 접근
+    getStoredApiKey() {
+        try {
+            return localStorage.getItem('gemini_api_key');
+        } catch (e) {
+            console.warn('localStorage not available:', e);
+            return null;
+        }
+    }
+
+    setupUI() {
+        const modal = document.getElementById('api-key-modal');
+        const input = document.getElementById('api-key-input');
+        const saveBtn = document.getElementById('btn-save-api-key');
+
+        if (saveBtn && input) {
+            saveBtn.addEventListener('click', () => {
+                const key = input.value.trim();
+                if (key) {
+                    this.setApiKey(key);
+                    if (modal) {
+                        modal.classList.add('hidden');
+                    }
+                }
+            });
+        }
+    }
+
+    setApiKey(key) {
+        this.apiKey = key;
+        try {
+            localStorage.setItem('gemini_api_key', key);
+        } catch (e) {
+            console.warn('Could not save to localStorage:', e);
+        }
+    }
+
+    initGemini() {
+        console.log("Gemini REST Client Ready");
+    }
+
+    checkApiKey() {
+        if (!this.apiKey) {
+            const modal = document.getElementById('api-key-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+            return false;
+        }
+        return true;
+    }
+
+    async generateImagePrompt(selectionsOrText, preferences) {
+        if (!this.checkApiKey()) return null;
+
+        // preferences handling
+        const prefStr = preferences && typeof preferences === 'object'
+            ? Object.entries(preferences).map(([k, v]) => `${k}:${v}`).join(', ')
+            : '';
+
+        let storyDescription = '';
+        if (typeof selectionsOrText === 'string') {
+            storyDescription = selectionsOrText;
+        } else if (Array.isArray(selectionsOrText)) {
+            storyDescription = selectionsOrText.map(s => s.label || s).join(', ');
+        }
+
+        const promptText = `You are a creative drawer for a child.
+combine step 1 value and step 2 value for drawing a picture. 
+draw ${storyDescription}.
+Overall Design Settings:
+  Tone: "Emotional, Modern, Artistic, Amorphous"
+  Visual Identity:
+    Background Color: "White, or Light Gray"
+    Text Color: "Black, or Part of Gradient"
+    Accent Color: "Mixing multiple Vivid colors (Aurora)"
+    Image Style:
+      Features: "Fluid Simulation, Mixing Ink, Abstract Shapes"
+      Shape: "Blobs, Waves, Smoke"
+      Texture: "Smooth Liquid, Airbrush Gradient"
+  Typography:
+    Heading: "Distort Elegant Serif, or make it Wave."
+    Body: "Minimal Sans-serif."
+    Numbers: "Numbers incorporating shape play."
+
+Additional User Preferences: ${prefStr}
+
+Output ONLY the English prompt string. No explanations.
+Ensure the style matches the Design Settings above.
+Keep it simple, colorful, and suitable for children.`;
+
+        try {
+            const parsedKey = this.apiKey.trim();
+            // Use Gemini 2.0 Flash
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${parsedKey}`;
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: promptText
+                        }]
+                    }],
+                    generationConfig: {
+                        temperature: 0.7,
+                        maxOutputTokens: 500
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                const errorMsg = errData.error?.message || response.statusText;
+                throw new Error(`API Error (${response.status}): ${errorMsg}`);
+            }
+
+            const data = await response.json();
+
+            // 응답 구조 검증
+            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                throw new Error('Invalid response structure from Gemini API');
+            }
+
+            const text = data.candidates[0].content.parts[0].text;
+            return text.trim();
+
+        } catch (e) {
+            console.error("Gemini API Error:", e);
+            alert("Gemini 이미지 프롬프트 생성 실패: " + e.message);
+            return null;
+        }
+    }
+
+    getPollinationsUrl(prompt) {
+        if (!prompt) {
+            console.warn('Empty prompt provided');
+            return null;
+        }
+
+        // URL Encoding with random seed to prevent caching
+        const encoded = encodeURIComponent(prompt);
+        const seed = Math.floor(Math.random() * 99999);
+        return `https://image.pollinations.ai/prompt/${encoded}?nologo=true&width=1024&height=1024&seed=${seed}`;
+    }
+
+    // 전체 워크플로우 실행 (선택사항)
+    async generateImage(selections, preferences) {
+        try {
+            // 1. 프롬프트 생성
+            const prompt = await this.generateImagePrompt(selections, preferences);
+            if (!prompt) {
+                throw new Error('Failed to generate prompt');
+            }
+
+            console.log('Generated prompt:', prompt);
+
+            // 2. 이미지 URL 생성
+            const imageUrl = this.getPollinationsUrl(prompt);
+
+            return {
+                prompt: prompt,
+                imageUrl: imageUrl
+            };
+        } catch (e) {
+            console.error('Image generation workflow failed:', e);
+            throw e;
+        }
+    }
+}
+
+// 전역으로 노출
+window.aiHandler = new AIHandler();

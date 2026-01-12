@@ -1,0 +1,10 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#4ECDC4" />
+  <circle cx="100" cy="80" r="30" fill="#FFF" />
+  <path d="M50 160 Q100 200 150 160 L150 180 L50 180 Z" fill="#FFF" />
+  <rect x="70" y="115" width="60" height="40" rx="10" fill="#FFF" />
+  <!-- Glasses -->
+  <circle cx="85" cy="80" r="12" fill="none" stroke="#333" stroke-width="3" />
+  <circle cx="115" cy="80" r="12" fill="none" stroke="#333" stroke-width="3" />
+  <line x1="97" y1="80" x2="103" y2="80" stroke="#333" stroke-width="3" />
+</svg>
