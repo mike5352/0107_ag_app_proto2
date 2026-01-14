@@ -69,7 +69,7 @@ const GAME_DATA = {
             wordType: '명사',
             choices: [
                 { id: 'c1', label: '사과', engLabel: 'apple', src: 'assets/objects/01_apple.jpg' },
-                { id: 'c2', label: '강아지', engLabel: 'dog', src: 'assets/objects/01_dog.jpg' },
+                { id: 'c2', label: '강아지', engLabel: 'dog', src: 'assets/objects/01_dog.png' },
                 { id: 'c3', label: '공룡', engLabel: 'dinosaur', src: 'assets/objects/01_dinosaur.jpg' },
                 { id: 'c4', label: '비행기', engLabel: 'airplane', src: 'assets/objects/01_airplane.jpg' },
                 { id: 'c5', label: '나무', engLabel: 'tree', src: 'assets/objects/01_tree.jpg' }

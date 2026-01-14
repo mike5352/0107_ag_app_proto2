@@ -1,5 +1,128 @@
 // import { aiHandler } from './api.js'; // Global aiHandler used
 
+// === TODDLER-FRIENDLY EFFECTS ===
+class ToddlerEffects {
+    constructor() {
+        this.confettiContainer = document.getElementById('confetti-container');
+        this.colors = ['#FF6B6B', '#FFB347', '#7FE5D3', '#87CEEB', '#FFD700', '#FF69B4', '#98D8C8', '#F7DC6F'];
+        this.shapes = ['circle', 'square', 'star'];
+        this.starEmojis = ['⭐', '✨', '🌟', '💫', '🎉', '🎊', '💖', '🌈'];
+    }
+
+    // Create confetti celebration effect
+    createConfetti(count = 30) {
+        if (!this.confettiContainer) return;
+
+        for (let i = 0; i < count; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                const shape = this.shapes[Math.floor(Math.random() * this.shapes.length)];
+                const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+
+                confetti.className = `confetti ${shape}`;
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+
+                if (shape === 'star') {
+                    confetti.textContent = this.starEmojis[Math.floor(Math.random() * this.starEmojis.length)];
+                } else {
+                    confetti.style.background = color;
+                }
+
+                this.confettiContainer.appendChild(confetti);
+
+                // Remove after animation completes
+                setTimeout(() => confetti.remove(), 4000);
+            }, i * 30);
+        }
+    }
+
+    // Create touch ripple effect at click/touch position
+    createRipple(element, event) {
+        const ripple = document.createElement('div');
+        ripple.className = 'touch-ripple';
+
+        const rect = element.getBoundingClientRect();
+        const x = (event.clientX || event.touches?.[0]?.clientX) - rect.left;
+        const y = (event.clientY || event.touches?.[0]?.clientY) - rect.top;
+
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+
+        element.style.position = 'relative';
+        element.style.overflow = 'hidden';
+        element.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 600);
+    }
+
+    // Card selection celebration
+    celebrateCardSelection(card) {
+        // Add selected class for animation
+        card.classList.add('selected');
+
+        // Create small confetti burst
+        this.createConfetti(15);
+
+        // Remove selected class after animation
+        setTimeout(() => card.classList.remove('selected'), 600);
+    }
+
+    // Big celebration for result reveal
+    celebrateResult() {
+        this.createConfetti(50);
+
+        // Add show class to image for animation
+        const finalImage = document.getElementById('final-image');
+        if (finalImage) {
+            finalImage.classList.add('show');
+        }
+
+        // Add show class to sentence display
+        const sentenceDisplay = document.getElementById('result-sentence');
+        if (sentenceDisplay) {
+            sentenceDisplay.classList.add('show');
+        }
+    }
+
+    // Create floating emoji effect
+    createFloatingEmoji(emoji, x, y) {
+        const emojiEl = document.createElement('div');
+        emojiEl.textContent = emoji;
+        emojiEl.style.cssText = `
+            position: fixed;
+            left: ${x}px;
+            top: ${y}px;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 9999;
+            animation: emoji-float 1.5s ease-out forwards;
+        `;
+
+        document.body.appendChild(emojiEl);
+        setTimeout(() => emojiEl.remove(), 1500);
+    }
+}
+
+// Add floating emoji animation to CSS dynamically
+const emojiFloatStyle = document.createElement('style');
+emojiFloatStyle.textContent = `
+    @keyframes emoji-float {
+        0% { 
+            transform: translateY(0) scale(1) rotate(0deg);
+            opacity: 1;
+        }
+        100% { 
+            transform: translateY(-80px) scale(1.5) rotate(20deg);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(emojiFloatStyle);
+
+// Global instance
+const toddlerEffects = new ToddlerEffects();
 
 class AppController {
     constructor() {
@@ -187,6 +310,7 @@ class AppController {
         const intro = document.getElementById('game-intro');
         const loop = document.getElementById('game-loop');
         const result = document.getElementById('game-result');
+        const closeBtn = document.getElementById('close-btn');
 
         [intro, loop, result].forEach(el => {
             el.classList.add('hidden');
@@ -196,7 +320,11 @@ class AppController {
         if (game.playStep === 0) {
             intro.classList.remove('hidden');
             intro.classList.add('active');
+            // Hide close button on home screen
+            if (closeBtn) closeBtn.style.display = 'none';
         } else if (game.playStep === 'result') {
+            // Show close button on result screen
+            if (closeBtn) closeBtn.style.display = 'flex';
             result.classList.remove('hidden');
             result.classList.add('active');
 
@@ -315,6 +443,9 @@ class AppController {
                         imgEl.style.visibility = 'visible';
                         imgEl.style.opacity = '1';
                         imgEl.dataset.generated = "true";
+
+                        // Toddler celebration effect!
+                        toddlerEffects.celebrateResult();
                     };
 
                     imgEl.onerror = () => {
@@ -334,6 +465,8 @@ class AppController {
             }
 
         } else {
+            // Show close button on game loop screen
+            if (closeBtn) closeBtn.style.display = 'flex';
             loop.classList.remove('hidden');
             loop.classList.add('active');
             this.renderGameLoop();
@@ -389,9 +522,13 @@ class AppController {
                 <span class="card-label">${choice.label}</span>
             `;
             card.title = choice.label; // Tooltip for accessibility/debugging
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (event) => {
                 audioManager.resumeAudioContext();
                 audioManager.playClick();
+
+                // Toddler-friendly effects
+                toddlerEffects.createRipple(card, event);
+                toddlerEffects.celebrateCardSelection(card);
 
                 game.selectGameOption(choice);
                 card.classList.add('selected');

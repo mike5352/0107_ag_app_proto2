@@ -1,27 +1,39 @@
 :root {
-    /* New Pastel Palette - Based on Reference */
-    --color-bg-start: #FF9DD6;
-    /* Pink */
-    --color-bg-end: #C8A2E8;
-    /* Lavender */
-    --color-primary: #FF6B9D;
-    /* Hot Pink */
-    --color-secondary: #B388EB;
-    /* Soft Purple */
-    --color-accent: #FFE066;
-    /* Soft Yellow */
+    /* Warm Peachy Theme - Based on Reference Design */
+    --color-bg-start: #FFDAB3;
+    /* Warm peach */
+    --color-bg-end: #FFE5D0;
+    /* Lighter warm peach */
+    --color-bg-mid: #FFD4B8;
+    /* Mid-tone peach */
+    --color-primary: #E88A4D;
+    /* Coral orange */
+    --color-secondary: #F5A855;
+    /* Golden orange */
+    --color-accent: #FFB347;
+    /* Warm yellow-orange */
     --color-mint: #7FE5D3;
-    /* Mint Green */
+    /* Mint Green (kept for contrast) */
     --color-sky: #87CEEB;
-    /* Sky Blue */
-    --color-text: #5A4A6A;
-    /* Soft Purple-Grey */
+    /* Sky Blue (kept for variety) */
+    --color-text: #6B5344;
+    /* Warm brown text */
+    --color-text-light: #8B7355;
+    /* Light brown */
     --color-white: #FFFFFF;
-    --color-bubble: rgba(255, 255, 255, 0.35);
-    /* Translucent white for bubbles */
+    --color-card-bg: #FFF8F0;
+    /* Cream white for cards */
+    --color-card-border: #FFDCC8;
+    /* Soft peach border */
+    --color-bubble: rgba(255, 248, 240, 0.9);
+    /* Warm translucent cream */
 
-    --card-radius: 50%;
-    /* Bubble-like round cards */
+    /* Sparkle/decoration colors */
+    --color-sparkle: #FFD700;
+    --color-sparkle-soft: rgba(255, 215, 0, 0.6);
+
+    --card-radius: 24px;
+    /* Rounded but not circular cards */
     --btn-radius: 50px;
 
     --font-main: 'Jua', 'Comic Sans MS', 'Chalkboard SE', sans-serif;
@@ -40,7 +52,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: var(--font-main);
-    background: linear-gradient(180deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
+    background: linear-gradient(135deg, #FFEBD2 0%, #FFDAB3 30%, #FFD4B8 60%, #FFCBA4 100%);
     color: var(--color-text);
     display: flex;
     justify-content: center;
@@ -50,14 +62,14 @@ body {
 }
 
 #app-container {
-    background: linear-gradient(180deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
+    background: linear-gradient(135deg, #FFEBD2 0%, #FFDAB3 30%, #FFD4B8 60%, #FFCBA4 100%);
     width: 100vw;
     height: 56.25vw;
     max-height: 100vh;
     max-width: 177.78vh;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 50px rgba(139, 115, 85, 0.2);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -72,13 +84,13 @@ body {
     height: 45px;
     border: none;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 248, 240, 0.95);
     color: var(--color-primary);
     font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
     z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 15px rgba(139, 115, 85, 0.2);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -89,7 +101,7 @@ body {
     background: var(--color-primary);
     color: white;
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+    box-shadow: 0 6px 20px rgba(232, 138, 77, 0.4);
 }
 
 .close-btn:active {
@@ -182,7 +194,7 @@ body {
     overflow: hidden;
     position: relative;
     cursor: grab;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.5) 100%);
+    background: #FFFFFF;
     border-radius: 30px;
     margin: 10px;
 }
@@ -206,17 +218,17 @@ body {
     padding: 30px;
     user-select: none;
     pointer-events: none;
-    /* Album style - cream pink background */
-    background: linear-gradient(135deg, #fffdf9 0%, #fff8f8 100%);
+    /* Album style - warm cream background */
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFF2E8 100%);
     border-radius: 24px;
-    border: 8px solid #FFB6C1;
-    box-shadow: 0 12px 30px rgba(255, 182, 193, 0.45);
-    filter: drop-shadow(0 5px 15px rgba(255, 182, 193, 0.2));
+    border: 6px solid var(--color-card-border);
+    box-shadow: 0 12px 30px rgba(139, 115, 85, 0.2);
+    filter: drop-shadow(0 5px 15px rgba(232, 138, 77, 0.15));
     animation: gentle-float 4s ease-in-out infinite;
     position: relative;
 }
 
-/* 룰렛 이미지에 핑크 오버레이 */
+/* 룰렛 이미지에 따뜻한 오버레이 */
 .roulette-img::after {
     content: '';
     position: absolute;
@@ -224,7 +236,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 192, 203, 0.06);
+    background: rgba(255, 220, 200, 0.04);
     border-radius: 16px;
     pointer-events: none;
 }
@@ -259,10 +271,10 @@ body {
     color: var(--color-primary);
     font-weight: bold;
     padding: 5px 15px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 248, 240, 0.9);
     border-radius: 20px;
     animation: pulse 2s ease-in-out infinite;
-    border: 2px solid rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(255, 220, 200, 0.8);
 }
 
 @keyframes pulse {
@@ -280,8 +292,8 @@ body {
 /* --- CLOUD-LIKE FOOTER SECTION --- */
 .intro-content-section {
     background:
-        radial-gradient(ellipse 120% 80% at 50% 100%, rgba(255, 255, 255, 0.9) 0%, transparent 70%),
-        linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.5) 100%);
+        radial-gradient(ellipse 120% 80% at 50% 100%, rgba(255, 248, 240, 0.95) 0%, transparent 70%),
+        linear-gradient(180deg, transparent 0%, rgba(255, 248, 240, 0.6) 100%);
     width: 100%;
     padding: 20px 20px 30px;
     border-radius: 50% 50% 0 0 / 30% 30% 0 0;
@@ -335,7 +347,7 @@ body {
     color: var(--color-white);
     font-weight: 600;
     margin-bottom: 0;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 3px rgba(139, 115, 85, 0.3);
 }
 
 /* --- NAVIGATION TABS --- */
@@ -405,7 +417,7 @@ body {
 /* --- BUTTONS --- */
 .btn-primary {
     background-color: var(--color-secondary);
-    /* Teal */
+    /* Golden orange */
     color: var(--color-white);
     border: none;
     padding: 20px 60px;
@@ -416,8 +428,8 @@ body {
     font-weight: bold;
     border-radius: var(--btn-radius);
     cursor: pointer;
-    box-shadow: 0 8px 0 #2A9D8F;
-    /* 3D effect border */
+    box-shadow: 0 8px 0 #D4922E;
+    /* 3D effect border - darker orange */
     transition: transform 0.1s, box-shadow 0.1s;
     margin-top: 20px;
 }
@@ -425,7 +437,7 @@ body {
 .btn-primary:active {
     transform: translateY(8px);
     /* Press down effect */
-    box-shadow: 0 0 0 #2A9D8F;
+    box-shadow: 0 0 0 #D4922E;
 }
 
 .btn-primary:hover {
@@ -435,7 +447,7 @@ body {
 /* Secondary Button (Save) */
 .btn-secondary {
     background-color: var(--color-primary);
-    /* Pink/Coral */
+    /* Coral orange */
     color: var(--color-white);
     border: none;
     padding: 20px 60px;
@@ -444,15 +456,15 @@ body {
     font-weight: bold;
     border-radius: var(--btn-radius);
     cursor: pointer;
-    box-shadow: 0 8px 0 #E76F51;
-    /* 3D effect border */
+    box-shadow: 0 8px 0 #C07040;
+    /* 3D effect border - darker coral */
     transition: transform 0.1s, box-shadow 0.1s;
     margin-top: 20px;
 }
 
 .btn-secondary:active {
     transform: translateY(8px);
-    box-shadow: 0 0 0 #E76F51;
+    box-shadow: 0 0 0 #C07040;
 }
 
 .btn-secondary:hover {
@@ -482,16 +494,16 @@ body {
     aspect-ratio: 1/1;
 }
 
-/* --- CARDS (Album Style - Cream Pink) --- */
+/* --- CARDS (Album Style - Warm Cream) --- */
 .card {
-    background: linear-gradient(135deg, #fffdf9 0%, #fff8f8 100%);
-    /* 연한 크림핑크 배경 */
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFF2E8 100%);
+    /* Warm cream background */
     border-radius: 24px;
     padding: 16px;
     cursor: pointer;
-    border: 6px solid #FFB6C1;
-    /* 핑크 테두리 */
-    box-shadow: 0 10px 25px rgba(255, 182, 193, 0.4);
+    border: 5px solid var(--color-card-border);
+    /* Warm peach border */
+    box-shadow: 0 10px 25px rgba(139, 115, 85, 0.15);
     transition: transform 0.25s ease, box-shadow 0.3s ease;
     margin: 8px;
 
@@ -534,13 +546,13 @@ body {
 
 .card:hover {
     transform: scale(1.05) translateY(-5px);
-    box-shadow: 0 15px 35px rgba(255, 182, 193, 0.55);
-    border-color: #ffafbd;
+    box-shadow: 0 15px 35px rgba(232, 138, 77, 0.25);
+    border-color: #F5A855;
 }
 
 .card:active {
     transform: scale(0.98);
-    box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
+    box-shadow: 0 5px 15px rgba(139, 115, 85, 0.15);
 }
 
 .card img {
@@ -554,7 +566,7 @@ body {
     transition: all 0.3s ease;
 }
 
-/* 이미지에 은은한 핑크 오버레이 효과 */
+/* 이미지에 은은한 따뜻한 오버레이 효과 */
 .card::before {
     content: '';
     position: absolute;
@@ -562,14 +574,14 @@ body {
     left: 12px;
     right: 12px;
     bottom: 12px;
-    background: rgba(255, 192, 203, 0.06);
+    background: rgba(255, 220, 200, 0.04);
     border-radius: 14px;
     pointer-events: none;
     z-index: 1;
 }
 
 .card:hover img {
-    filter: drop-shadow(0 5px 10px rgba(255, 182, 193, 0.4)) brightness(1.02);
+    filter: drop-shadow(0 5px 10px rgba(232, 138, 77, 0.2)) brightness(1.02);
 }
 
 /* 카드 라벨 숨김 */
@@ -651,15 +663,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 200, 230, 0.3));
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: linear-gradient(180deg, rgba(255, 248, 240, 0.7), rgba(255, 220, 200, 0.4));
+    border: 2px solid rgba(255, 220, 200, 0.6);
     border-radius: 30px;
     padding: 15px;
     backdrop-filter: blur(5px);
     box-shadow:
-        0 8px 32px rgba(255, 100, 150, 0.15),
+        0 8px 32px rgba(139, 115, 85, 0.1),
         inset 0 2px 10px rgba(255, 255, 255, 0.4);
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
 .game-sidebar h3 {
@@ -725,8 +736,8 @@ body {
     text-align: center;
     background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
     border-radius: 30px;
-    box-shadow: 0 4px 15px rgba(255, 100, 150, 0.3);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(232, 138, 77, 0.3);
+    text-shadow: 1px 1px 2px rgba(139, 115, 85, 0.3);
     z-index: 20;
     position: relative;
 }
@@ -738,7 +749,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(224, 247, 250, 0.95);
+    background: rgba(255, 248, 240, 0.95);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -755,9 +766,9 @@ body {
     width: 100px;
     /* Reduced size */
     height: 100px;
-    border: 6px solid rgba(78, 205, 196, 0.2);
-    border-top: 6px solid var(--color-secondary);
-    border-right: 6px solid var(--color-primary);
+    border: 6px solid rgba(232, 138, 77, 0.2);
+    border-top: 6px solid var(--color-primary);
+    border-right: 6px solid var(--color-secondary);
     border-bottom: 6px solid var(--color-accent);
     border-radius: 50%;
     animation: spin 1.5s linear infinite;
@@ -805,11 +816,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, #fffdf9 0%, #fff8f8 100%);
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFF2E8 100%);
     padding: 10px;
     border-radius: 16px;
-    border: 4px solid #FFB6C1;
-    box-shadow: 0 6px 18px rgba(255, 182, 193, 0.35);
+    border: 4px solid var(--color-card-border);
+    box-shadow: 0 6px 18px rgba(139, 115, 85, 0.15);
     flex: 0 0 28%;
     width: 28%;
     transition: transform 0.25s ease, box-shadow 0.3s ease;
@@ -818,11 +829,11 @@ body {
 
 .summary-card:hover {
     transform: scale(1.05) translateY(-3px);
-    box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5);
-    border-color: #ffafbd;
+    box-shadow: 0 10px 25px rgba(232, 138, 77, 0.25);
+    border-color: #F5A855;
 }
 
-/* Summary 카드 핑크 오버레이 */
+/* Summary 카드 따뜻한 오버레이 */
 .summary-card::before {
     content: '';
     position: absolute;
@@ -830,7 +841,7 @@ body {
     left: 10px;
     right: 10px;
     bottom: 25px;
-    background: rgba(255, 192, 203, 0.06);
+    background: rgba(255, 220, 200, 0.04);
     border-radius: 12px;
     pointer-events: none;
 }
@@ -841,7 +852,7 @@ body {
     object-fit: contain;
     margin-bottom: 4px;
     border-radius: 12px;
-    filter: drop-shadow(0 2px 5px rgba(255, 182, 193, 0.2));
+    filter: drop-shadow(0 2px 5px rgba(139, 115, 85, 0.15));
 }
 
 .summary-card span {
@@ -890,15 +901,15 @@ body {
     width: 140px;
     height: 100px;
 
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.6), rgba(255, 200, 230, 0.4));
-    border: 3px solid rgba(255, 255, 255, 0.7);
+    background: linear-gradient(145deg, rgba(255, 248, 240, 0.8), rgba(255, 220, 200, 0.5));
+    border: 3px solid rgba(255, 220, 200, 0.8);
     border-radius: 30% 30% 35% 35%;
     /* Bubble shape */
     backdrop-filter: blur(5px);
 
     cursor: pointer;
     box-shadow:
-        0 8px 25px rgba(255, 100, 150, 0.25),
+        0 8px 25px rgba(139, 115, 85, 0.15),
         inset 0 2px 10px rgba(255, 255, 255, 0.5);
 
     transition: all 0.3s ease;
@@ -907,15 +918,15 @@ body {
 .btn-stage:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow:
-        0 12px 35px rgba(255, 100, 150, 0.4),
+        0 12px 35px rgba(232, 138, 77, 0.25),
         inset 0 2px 15px rgba(255, 255, 255, 0.7);
-    border-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(245, 168, 85, 0.8);
 }
 
 .btn-stage:active {
     transform: translateY(2px) scale(0.98);
     box-shadow:
-        0 4px 15px rgba(255, 100, 150, 0.2),
+        0 4px 15px rgba(139, 115, 85, 0.15),
         inset 0 2px 5px rgba(255, 255, 255, 0.3);
 }
 
@@ -933,63 +944,1690 @@ body {
     font-family: var(--font-main);
 }
 
-/* Unique colors for each stage button */
+/* Unique colors for each stage button - Warm theme variations */
 #start-stage-1 {
-    border-color: #FF6B6B;
+    border-color: #E88A4D;
 }
 
 #start-stage-1:hover {
-    background: linear-gradient(145deg, #fff0f0, #ffe0e0);
+    background: linear-gradient(145deg, #FFF5EE, #FFE8DD);
 }
 
 #start-stage-1 .stage-number {
-    color: #FF6B6B;
+    color: #E88A4D;
 }
 
 #start-stage-2 {
-    border-color: #4ECDC4;
+    border-color: #F5A855;
 }
 
 #start-stage-2:hover {
-    background: linear-gradient(145deg, #f0fffd, #e0fff9);
+    background: linear-gradient(145deg, #FFF8EE, #FFECD8);
 }
 
 #start-stage-2 .stage-number {
-    color: #4ECDC4;
+    color: #F5A855;
 }
 
 #start-stage-3 {
-    border-color: #FFD93D;
+    border-color: #FFB347;
 }
 
 #start-stage-3:hover {
-    background: linear-gradient(145deg, #fffef0, #fff8d0);
+    background: linear-gradient(145deg, #FFFAF0, #FFF0DB);
 }
 
 #start-stage-3 .stage-number {
-    color: #E6C235;
+    color: #E89F3C;
 }
 
 #start-stage-4 {
-    border-color: #A66CFF;
+    border-color: #D4922E;
 }
 
 #start-stage-4:hover {
-    background: linear-gradient(145deg, #f8f0ff, #f0e0ff);
+    background: linear-gradient(145deg, #FFF5E8, #FFE6C8);
 }
 
 #start-stage-4 .stage-number {
-    color: #A66CFF;
+    color: #D4922E;
 }
 
 #start-stage-5 {
-    border-color: #6BCB77;
+    border-color: #C07040;
 }
 
 #start-stage-5:hover {
-    background: linear-gradient(145deg, #f0fff2, #e0ffe5);
+    background: linear-gradient(145deg, #FFF2E8, #FFE0D0);
 }
 
 #start-stage-5 .stage-number {
-    color: #6BCB77;
+    color: #C07040;
+}
+
+/* ========================================
+   RESPONSIVE STYLES - MOBILE & TABLET
+   ======================================== */
+
+/* Tablet Portrait (768px and below) */
+@media screen and (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #app-container {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* Title adjustments */
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    /* Close button smaller */
+    .close-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        top: 10px;
+        right: 10px;
+    }
+
+    /* Roulette container */
+    .roulette-container {
+        min-height: 180px;
+    }
+
+    .roulette-img {
+        padding: 20px;
+        border-width: 6px;
+    }
+
+    .drag-hint {
+        font-size: 0.8rem;
+        padding: 4px 12px;
+    }
+
+    /* Stage buttons */
+    .stage-buttons-container {
+        gap: 10px;
+        max-width: 100%;
+        padding: 0 10px 15px;
+    }
+
+    .btn-stage {
+        width: 120px;
+        height: 85px;
+    }
+
+    .btn-stage .stage-number {
+        font-size: 1.2rem;
+    }
+
+    .btn-stage .stage-label {
+        font-size: 0.95rem;
+    }
+
+    /* Game layout - stack vertically */
+    .game-layout {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .game-main {
+        width: 100%;
+        height: auto;
+        flex: 1;
+    }
+
+    .game-sidebar {
+        width: 100%;
+        height: auto;
+        min-height: 120px;
+        padding: 10px;
+        border-radius: 20px;
+        order: 2;
+    }
+
+    .game-sidebar h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    /* Game instruction */
+    #game-instruction {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+
+    /* Grid cards */
+    .grid-container.grid-5 .card {
+        flex: 0 0 30%;
+        width: 30%;
+    }
+
+    .card {
+        height: 15vh;
+        padding: 10px;
+        border-width: 4px;
+    }
+
+    /* Result layout - stack vertically */
+    .result-layout {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    #result-image-container {
+        width: 100%;
+        height: auto;
+        min-height: 45vh;
+    }
+
+    #result-image-container img {
+        width: 100%;
+        height: auto;
+        max-height: 40vh;
+    }
+
+    .sentence-display {
+        font-size: 1.1rem;
+        padding: 8px 15px;
+    }
+
+    .result-sidebar {
+        width: 100%;
+        height: auto;
+        gap: 10px;
+    }
+
+    /* Summary cards in sidebar */
+    .summary-card {
+        flex: 0 0 22%;
+        width: 22%;
+        padding: 8px;
+    }
+
+    .summary-card img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .summary-card span {
+        font-size: 0.7rem;
+    }
+
+    /* Buttons */
+    .btn-primary,
+    .btn-secondary {
+        padding: 15px 40px;
+        font-size: 1.4rem;
+        margin-top: 10px;
+    }
+
+    /* Progress bar */
+    #progress-bar {
+        height: 12px;
+        width: 90%;
+        margin: 8px auto;
+    }
+
+    /* Loading spinner */
+    .loading-spinner {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* Mobile (480px and below) */
+@media screen and (max-width: 480px) {
+
+    /* Title even smaller */
+    .title {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    /* Intro content section */
+    .intro-content-section {
+        padding: 15px 10px 20px;
+    }
+
+    /* Stage buttons - 2 per row on small screens */
+    .stage-buttons-container {
+        gap: 8px;
+    }
+
+    .btn-stage {
+        width: 45%;
+        height: 75px;
+        flex: 0 0 45%;
+    }
+
+    .btn-stage .stage-number {
+        font-size: 1rem;
+    }
+
+    .btn-stage .stage-label {
+        font-size: 0.85rem;
+    }
+
+    /* Close button */
+    .close-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    /* Roulette */
+    .roulette-container {
+        min-height: 150px;
+        margin: 5px;
+        border-radius: 20px;
+    }
+
+    .roulette-img {
+        padding: 15px;
+        border-width: 5px;
+        border-radius: 16px;
+    }
+
+    /* Game instruction */
+    #game-instruction {
+        font-size: 1.1rem;
+        margin: 5px 0;
+    }
+
+    /* Grid cards - larger touch target */
+    .grid-container {
+        gap: 10px;
+        padding: 3px;
+    }
+
+    .grid-container.grid-5 .card {
+        flex: 0 0 29%;
+        width: 29%;
+    }
+
+    .card {
+        height: 13vh;
+        padding: 8px;
+        margin: 4px;
+        border-width: 3px;
+        border-radius: 18px;
+    }
+
+    /* Sidebar adjustments */
+    .game-sidebar,
+    .result-sidebar {
+        padding: 8px;
+        border-radius: 15px;
+    }
+
+    .game-sidebar h3 {
+        font-size: 0.9rem;
+        padding-bottom: 8px;
+    }
+
+    /* Choice summary */
+    .choice-summary {
+        gap: 6px;
+        max-height: 100px;
+    }
+
+    .summary-card {
+        flex: 0 0 18%;
+        width: 18%;
+        padding: 5px;
+        border-width: 3px;
+        border-radius: 12px;
+    }
+
+    .summary-card img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .summary-card span {
+        font-size: 0.6rem;
+    }
+
+    /* Result image */
+    #result-image-container {
+        min-height: 35vh;
+    }
+
+    #result-image-container img {
+        max-height: 30vh;
+    }
+
+    .sentence-display {
+        font-size: 1rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+    }
+
+    /* Buttons smaller */
+    .btn-primary,
+    .btn-secondary {
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        border-radius: 35px;
+    }
+
+    /* Progress bar */
+    #progress-bar {
+        height: 10px;
+        width: 95%;
+    }
+
+    /* Nav tabs (if visible) */
+    .nav-tab {
+        width: 70px;
+        height: 70px;
+    }
+
+    .nav-label {
+        font-size: 1rem;
+    }
+
+    .nav-container {
+        gap: 20px;
+    }
+
+    /* Loading spinner smaller */
+    .loading-spinner {
+        width: 60px;
+        height: 60px;
+        border-width: 4px;
+    }
+}
+
+/* Extra small devices (320px and below) */
+@media screen and (max-width: 320px) {
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .btn-stage {
+        width: 48%;
+        height: 65px;
+    }
+
+    .btn-stage .stage-number {
+        font-size: 0.9rem;
+    }
+
+    .btn-stage .stage-label {
+        font-size: 0.75rem;
+    }
+
+    .grid-container.grid-5 .card {
+        flex: 0 0 31%;
+        width: 31%;
+    }
+
+    .card {
+        height: 11vh;
+        padding: 5px;
+        margin: 3px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+}
+
+/* Landscape mode on mobile phones */
+@media screen and (max-width: 896px) and (orientation: landscape) {
+    #app-container {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .game-layout,
+    .result-layout {
+        flex-direction: row;
+    }
+
+    .game-main {
+        width: 65%;
+    }
+
+    .game-sidebar {
+        width: 35%;
+        order: 0;
+    }
+
+    #result-image-container {
+        width: 65%;
+    }
+
+    .result-sidebar {
+        width: 35%;
+    }
+
+    .card {
+        height: 25vh;
+    }
+
+    .roulette-container {
+        min-height: 60vh;
+    }
+}
+
+/* Touch-friendly hover states - disable on touch devices */
+@media (hover: none) {
+    .card:hover {
+        transform: none;
+        box-shadow: 0 10px 25px rgba(139, 115, 85, 0.15);
+    }
+
+    .card:active {
+        transform: scale(0.95);
+    }
+
+    .btn-stage:hover {
+        transform: none;
+    }
+
+    .btn-stage:active {
+        transform: scale(0.95);
+    }
+
+    .summary-card:hover {
+        transform: none;
+    }
+}
+
+/* ========================================
+   INFO BUTTON & MODAL STYLES
+   ======================================== */
+
+/* Info Button - Bottom Right */
+.info-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    background: #2d2d2d;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-btn:hover {
+    background: #444;
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.info-btn:active {
+    transform: scale(0.95);
+}
+
+/* Info Modal Overlay */
+.info-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+.info-modal.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal Content */
+.info-modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Modal Close Button */
+.info-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    background: #ff6b6b;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.info-modal-close:hover {
+    background: #ee5a5a;
+    transform: scale(1.1);
+}
+
+/* Tabs */
+.info-tabs {
+    display: flex;
+    background: #f5f5f5;
+    border-bottom: 2px solid #eee;
+    padding: 15px 20px 0;
+}
+
+.info-tab {
+    flex: 1;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-main);
+}
+
+.info-tab:hover {
+    color: #555;
+}
+
+.info-tab.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+    background: white;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Tab Content */
+.info-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 25px 30px;
+    position: relative;
+}
+
+.info-tab-content {
+    display: none;
+}
+
+.info-tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Document Styling */
+.info-tab-content h2 {
+    color: var(--color-primary);
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+.info-tab-content h3 {
+    color: #444;
+    font-size: 1.2rem;
+    margin: 20px 0 10px;
+    padding-left: 10px;
+    border-left: 4px solid var(--color-secondary);
+}
+
+.info-tab-content h4 {
+    color: #555;
+    font-size: 1rem;
+    margin: 15px 0 8px;
+}
+
+.info-tab-content p {
+    color: #555;
+    line-height: 1.7;
+    margin: 8px 0;
+}
+
+.info-tab-content ul {
+    margin: 10px 0;
+    padding-left: 25px;
+}
+
+.info-tab-content li {
+    color: #555;
+    line-height: 1.8;
+    margin: 5px 0;
+}
+
+/* Detail text - paragraph descriptions */
+.detail-text {
+    color: #666;
+    line-height: 1.8;
+    margin: 10px 0 15px;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+    border-radius: 10px;
+    border-left: 4px solid var(--color-mint);
+    font-size: 0.95rem;
+}
+
+/* Highlight Box */
+.highlight-box {
+    background: linear-gradient(135deg, #fff8f0, #fff5f5);
+    border: 2px solid #ffd4a8;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin: 15px 0;
+}
+
+.highlight-box.green {
+    background: linear-gradient(135deg, #f0fff4, #e8fff0);
+    border-color: #9ae6b4;
+}
+
+.highlight-box p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+/* Proposal Table */
+.proposal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.proposal-table th,
+.proposal-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.proposal-table th {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    font-weight: bold;
+}
+
+.proposal-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.proposal-table tr:hover {
+    background: #f0f0f0;
+}
+
+/* Mobile Responsive for Modal */
+@media screen and (max-width: 768px) {
+    .info-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .info-modal-content {
+        width: 95%;
+        max-height: 90vh;
+        border-radius: 15px;
+    }
+
+    .info-body {
+        padding: 15px 20px;
+    }
+
+    .info-tab-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .info-tab-content h3 {
+        font-size: 1.05rem;
+    }
+
+    .info-tab {
+        font-size: 0.95rem;
+        padding: 10px 12px;
+    }
+
+    .proposal-table th,
+    .proposal-table td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .info-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .info-tabs {
+        padding: 10px 10px 0;
+    }
+
+    .info-tab {
+        font-size: 0.85rem;
+        padding: 8px 8px;
+    }
+
+    .info-body {
+        padding: 12px 15px;
+    }
+
+    .info-tab-content h2 {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========================================
+   SPARKLE DECORATIONS & WARM THEME ACCENTS
+   ======================================== */
+
+/* Section Header Badge - Warm Coral Pill Style */
+.section-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #E88A4D 0%, #F5A855 100%);
+    padding: 8px 20px;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(232, 138, 77, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Sparkle Animation */
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Sparkle Elements */
+.sparkle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, var(--color-sparkle) 20%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+.sparkle::before,
+.sparkle::after {
+    content: '';
+    position: absolute;
+    background: var(--color-sparkle);
+}
+
+.sparkle::before {
+    width: 2px;
+    height: 12px;
+    left: 5px;
+    top: 0;
+    border-radius: 1px;
+}
+
+.sparkle::after {
+    width: 12px;
+    height: 2px;
+    left: 0;
+    top: 5px;
+    border-radius: 1px;
+}
+
+/* App Container Sparkle Decorations */
+#app-container::before,
+#app-container::after {
+    content: '✦';
+    position: absolute;
+    font-size: 1.2rem;
+    color: var(--color-sparkle-soft);
+    pointer-events: none;
+    animation: sparkle 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+#app-container::before {
+    top: 8%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+#app-container::after {
+    top: 15%;
+    right: 8%;
+    animation-delay: 1s;
+}
+
+/* Additional sparkle elements via intro header */
+.intro-header::before,
+.intro-header::after {
+    content: '✦';
+    position: absolute;
+    font-size: 0.9rem;
+    color: rgba(255, 215, 0, 0.5);
+    pointer-events: none;
+    animation: sparkle 2.5s ease-in-out infinite;
+}
+
+.intro-header::before {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0.5s;
+}
+
+.intro-header::after {
+    top: 30%;
+    right: 12%;
+    animation-delay: 1.5s;
+}
+
+/* Warm gradient text for emphasis */
+.warm-text {
+    background: linear-gradient(135deg, #E88A4D, #F5A855);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Highlighted text box - Warm theme */
+.warm-highlight-box {
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFF2E8 100%);
+    border: 2px solid var(--color-card-border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 15px rgba(139, 115, 85, 0.1);
+}
+
+/* Subtle floating decorative circles in background */
+.decorative-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 220, 200, 0.3) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Make intro header position relative for sparkle positioning */
+.intro-header {
+    position: relative;
+}
+
+/* ========================================
+   🎈 TODDLER-FRIENDLY ANIMATIONS & INTERACTIONS
+   For children aged 3-5
+   ======================================== */
+
+/* --- FLOATING DECORATIONS CONTAINER --- */
+#floating-decorations {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* --- FLOATING BUBBLES --- */
+.floating-bubble {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.6;
+    animation: float-up 8s ease-in-out infinite;
+}
+
+.bubble-1 {
+    left: 5%;
+    bottom: -50px;
+    animation-delay: 0s;
+    animation-duration: 10s;
+}
+
+.bubble-2 {
+    left: 50%;
+    bottom: -50px;
+    animation-delay: 3s;
+    animation-duration: 12s;
+    font-size: 2.5rem;
+}
+
+.bubble-3 {
+    left: 85%;
+    bottom: -50px;
+    animation-delay: 5s;
+    animation-duration: 9s;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+    }
+
+    90% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* --- FLOATING STARS --- */
+.floating-star {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: twinkle-float 6s ease-in-out infinite;
+}
+
+.star-1 {
+    top: 10%;
+    left: 8%;
+    animation-delay: 0s;
+}
+
+.star-2 {
+    top: 20%;
+    right: 15%;
+    animation-delay: 2s;
+    font-size: 1.2rem;
+}
+
+.star-3 {
+    top: 35%;
+    left: 70%;
+    animation-delay: 4s;
+    font-size: 1.8rem;
+}
+
+@keyframes twinkle-float {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.5;
+    }
+
+    25% {
+        transform: translateY(-10px) scale(1.2);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(5px) scale(0.9);
+        opacity: 0.7;
+    }
+
+    75% {
+        transform: translateY(-5px) scale(1.1);
+        opacity: 0.9;
+    }
+}
+
+/* --- FLOATING CLOUDS --- */
+.floating-cloud {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0.4;
+    animation: drift-horizontal 20s linear infinite;
+}
+
+.cloud-1 {
+    top: 5%;
+    left: -60px;
+    animation-duration: 25s;
+}
+
+.cloud-2 {
+    top: 25%;
+    left: -60px;
+    animation-delay: 10s;
+    animation-duration: 30s;
+    font-size: 4rem;
+}
+
+@keyframes drift-horizontal {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(100vw + 100px));
+    }
+}
+
+/* --- FLOATING HEARTS --- */
+.floating-heart {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: heart-float 5s ease-in-out infinite;
+}
+
+.heart-1 {
+    top: 50%;
+    left: 3%;
+    animation-delay: 0s;
+}
+
+.heart-2 {
+    top: 60%;
+    right: 5%;
+    animation-delay: 2.5s;
+}
+
+@keyframes heart-float {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.3);
+        opacity: 0.8;
+    }
+}
+
+/* --- CONFETTI CONTAINER & EFFECTS --- */
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    animation: confetti-fall 3s ease-out forwards;
+}
+
+.confetti.circle {
+    border-radius: 50%;
+}
+
+.confetti.square {
+    border-radius: 3px;
+}
+
+.confetti.star {
+    background: transparent !important;
+    font-size: 20px;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-20px) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(720deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* --- ENHANCED CARD ANIMATIONS FOR TODDLERS --- */
+.card {
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.08) translateY(-8px) rotate(-2deg);
+    animation: card-wiggle 0.5s ease-in-out;
+}
+
+.card:active {
+    transform: scale(0.95);
+    animation: card-press 0.2s ease-out;
+}
+
+@keyframes card-wiggle {
+
+    0%,
+    100% {
+        transform: scale(1.08) translateY(-8px) rotate(-2deg);
+    }
+
+    25% {
+        transform: scale(1.08) translateY(-8px) rotate(2deg);
+    }
+
+    50% {
+        transform: scale(1.08) translateY(-8px) rotate(-2deg);
+    }
+
+    75% {
+        transform: scale(1.08) translateY(-8px) rotate(1deg);
+    }
+}
+
+@keyframes card-press {
+    0% {
+        transform: scale(1.08);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(0.95);
+    }
+}
+
+/* Card selection sparkle animation */
+.card.selected {
+    animation: card-selected 0.6s ease-out;
+}
+
+@keyframes card-selected {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 10px 25px rgba(139, 115, 85, 0.15);
+    }
+
+    30% {
+        transform: scale(1.15);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
+            0 0 60px rgba(255, 183, 71, 0.4);
+    }
+
+    60% {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(232, 138, 77, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 10px 25px rgba(139, 115, 85, 0.15);
+    }
+}
+
+/* --- CUTE LOADING ANIMATION --- */
+.loading-overlay {
+    background: radial-gradient(circle, rgba(255, 248, 240, 0.98) 0%, rgba(255, 235, 210, 0.95) 100%);
+}
+
+.loading-character {
+    font-size: 4rem;
+    animation: bounce-character 1s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes bounce-character {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    25% {
+        transform: translateY(-20px) scale(1.1);
+    }
+
+    50% {
+        transform: translateY(0) scale(1);
+    }
+
+    75% {
+        transform: translateY(-10px) scale(1.05);
+    }
+}
+
+.rainbow-spinner {
+    width: 80px;
+    height: 80px;
+    border: 8px solid transparent;
+    border-top-color: #FF6B6B;
+    border-right-color: #FFB347;
+    border-bottom-color: #7FE5D3;
+    border-left-color: #87CEEB;
+    border-radius: 50%;
+    animation: rainbow-spin 1s linear infinite;
+}
+
+@keyframes rainbow-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.loading-dots {
+    animation: dots-blink 1.5s ease-in-out infinite;
+}
+
+@keyframes dots-blink {
+
+    0%,
+    20% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    80%,
+    100% {
+        opacity: 0;
+    }
+}
+
+/* --- BOUNCING TITLE ANIMATION --- */
+.title {
+    animation: title-bounce 3s ease-in-out infinite;
+}
+
+@keyframes title-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    10% {
+        transform: translateY(-5px);
+    }
+
+    20% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-3px);
+    }
+
+    40% {
+        transform: translateY(0);
+    }
+}
+
+/* --- STAGE BUTTON ENHANCED ANIMATIONS --- */
+.btn-stage {
+    animation: stage-pulse 2s ease-in-out infinite;
+}
+
+.btn-stage:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.btn-stage:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.btn-stage:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.btn-stage:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.btn-stage:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+@keyframes stage-pulse {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 8px 25px rgba(139, 115, 85, 0.15),
+            inset 0 2px 10px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(139, 115, 85, 0.2),
+            inset 0 2px 15px rgba(255, 255, 255, 0.6);
+    }
+}
+
+.btn-stage:hover {
+    animation: stage-wiggle 0.4s ease-in-out;
+}
+
+@keyframes stage-wiggle {
+
+    0%,
+    100% {
+        transform: translateY(-5px) scale(1.05) rotate(0deg);
+    }
+
+    20% {
+        transform: translateY(-5px) scale(1.05) rotate(-3deg);
+    }
+
+    40% {
+        transform: translateY(-5px) scale(1.05) rotate(3deg);
+    }
+
+    60% {
+        transform: translateY(-5px) scale(1.05) rotate(-2deg);
+    }
+
+    80% {
+        transform: translateY(-5px) scale(1.05) rotate(2deg);
+    }
+}
+
+/* --- RESULT IMAGE CELEBRATION --- */
+#final-image {
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#final-image.show {
+    animation: image-reveal 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes image-reveal {
+    0% {
+        transform: scale(0.3) rotate(-10deg);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1) rotate(3deg);
+    }
+
+    70% {
+        transform: scale(0.95) rotate(-1deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* --- SENTENCE DISPLAY ANIMATION --- */
+.sentence-display {
+    animation: sentence-pop 0.5s ease-out forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+.sentence-display.show {
+    opacity: 1;
+}
+
+@keyframes sentence-pop {
+    0% {
+        transform: scale(0.5) translateY(20px);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.1) translateY(-5px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* --- PRIMARY BUTTON BOUNCE --- */
+.btn-primary,
+.btn-secondary {
+    transition: transform 0.1s, box-shadow 0.1s, filter 0.2s;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    animation: button-bounce 0.5s ease-in-out;
+}
+
+@keyframes button-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(-8px);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    75% {
+        transform: translateY(-4px);
+    }
+}
+
+/* --- SUMMARY CARD ENTRANCE --- */
+.summary-card {
+    animation: summary-card-enter 0.4s ease-out;
+}
+
+@keyframes summary-card-enter {
+    0% {
+        transform: scale(0) rotate(-20deg);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* --- PROGRESS BAR ANIMATION --- */
+.progress-bar-container {
+    position: relative;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    margin: 10px auto;
+    width: 80%;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#progress-fill {
+    background: linear-gradient(90deg,
+            #FF6B6B 0%,
+            #FFB347 25%,
+            #7FE5D3 50%,
+            #87CEEB 75%,
+            #E88A4D 100%);
+    background-size: 200% 100%;
+    animation: progress-rainbow 2s linear infinite;
+}
+
+@keyframes progress-rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* --- ROULETTE IMAGE ENHANCED --- */
+.roulette-img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.roulette-img:hover {
+    animation: roulette-pop 0.4s ease-out;
+}
+
+@keyframes roulette-pop {
+
+    0%,
+    100% {
+        transform: translateY(-6px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-6px) scale(1.02);
+    }
+}
+
+/* --- TOUCH RIPPLE EFFECT --- */
+.touch-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
+    pointer-events: none;
+    animation: ripple-expand 0.6s ease-out forwards;
+}
+
+@keyframes ripple-expand {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+
+    100% {
+        width: 200px;
+        height: 200px;
+        margin-left: -100px;
+        margin-top: -100px;
+        opacity: 0;
+    }
+}
+
+/* --- DISABLE ANIMATIONS FOR PERFORMANCE (if needed) --- */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
