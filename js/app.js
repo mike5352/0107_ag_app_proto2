@@ -174,6 +174,50 @@ class AppController {
             });
         }
 
+        // Photo Gallery Modal Functionality
+        const photoModal = document.getElementById('photo-modal');
+        const photoModalImg = document.getElementById('photo-modal-img');
+        const photoModalClose = document.querySelector('.photo-modal-close');
+        const photoModalBackdrop = document.querySelector('.photo-modal-backdrop');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        if (photoModal && galleryItems.length > 0) {
+            // Open modal on gallery item click
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const imgSrc = item.dataset.src;
+                    if (imgSrc && photoModalImg) {
+                        photoModalImg.src = imgSrc;
+                        photoModal.classList.remove('hidden');
+                    }
+                });
+            });
+
+            // Close modal on close button click
+            if (photoModalClose) {
+                photoModalClose.addEventListener('click', () => {
+                    photoModal.classList.add('hidden');
+                    photoModalImg.src = '';
+                });
+            }
+
+            // Close modal on backdrop click
+            if (photoModalBackdrop) {
+                photoModalBackdrop.addEventListener('click', () => {
+                    photoModal.classList.add('hidden');
+                    photoModalImg.src = '';
+                });
+            }
+
+            // Close modal on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !photoModal.classList.contains('hidden')) {
+                    photoModal.classList.add('hidden');
+                    photoModalImg.src = '';
+                }
+            });
+        }
+
         const restartBtn = document.getElementById('restart-btn');
         if (restartBtn) restartBtn.addEventListener('click', () => {
             game.resetGame();
